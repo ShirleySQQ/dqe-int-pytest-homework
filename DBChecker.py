@@ -103,8 +103,8 @@ def using_sparkSQL(schema_name: str, table_name: str) -> DataFrame:
             .appName('DatabaseTableQuery')
             .config("spark.driver.extraJavaOptions", "-Djava.library.path=/path/to/your/sqljdbc_auth.dll")
             .config("spark.executor.extraJavaOptions", "-Djava.library.path=/path/to/your/sqljdbc_auth.dll")
-            .config("spark.driver.memory", "2g")  # Increase driver memory to 2 GB
-            .config("spark.executor.memory", "4g")  # Increase executor memory to 4 GB
+            #.config("spark.driver.memory", "2g")  # Increase driver memory to 2 GB
+            #.config("spark.executor.memory", "4g")  # Increase executor memory to 4 GB
             .config("spark.jars",
                     "f:///C:/Users/Shirley_Shi/PycharmProjects/dqe-int-pytest-homewor/mssql-jdbc-12.4.2.jre11.jar")
             .getOrCreate())
