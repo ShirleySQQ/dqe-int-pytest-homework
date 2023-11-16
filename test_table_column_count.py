@@ -35,3 +35,4 @@ def test_negative_amount_records_percent():
 # checking that a column value should end with a special character, like $
 def test_validity_value():
     assert verify_validity("hr", "sales_data", "amount", '$') is True, 'column value not meets requirement.'
+

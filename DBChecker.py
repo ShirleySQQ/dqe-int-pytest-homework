@@ -1,6 +1,9 @@
 import pyodbc
-
+import pandas
 import inits
+from pyspark.sql import SparkSession, DataFrame
+
+
 
 cursor = inits.BasicActions.connDB()
 
@@ -92,3 +95,29 @@ def verify_validity(schema_name: str, table_name: str, column_name: str, expecte
         return True
     else:
         return False
+
+
+def using_sparkSQL(schema_name: str, table_name: str) -> DataFrame:
+    spark = (
+        SparkSession.builder.master('local[*]')
+            .appName('DatabaseTableQuery')
+            .config("spark.driver.extraJavaOptions", "-Djava.library.path=/path/to/your/sqljdbc_auth.dll")
+            .config("spark.executor.extraJavaOptions", "-Djava.library.path=/path/to/your/sqljdbc_auth.dll")
+            .config("spark.driver.memory", "2g")  # Increase driver memory to 2 GB
+            .config("spark.executor.memory", "4g")  # Increase executor memory to 4 GB
+            .config("spark.jars",
+                    "f:///C:/Users/Shirley_Shi/PycharmProjects/dqe-int-pytest-homewor/mssql-jdbc-12.4.2.jre11.jar")
+            .getOrCreate())
+    url = ("jdbc:sqlserver://localhost:1433;databaseName='TRN';integratedSecurity=true")
+    # Set your database URL, hostname, port, and database name
+    properties = {
+        "user": 'EPAM\Shirley_Shi',
+        "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    }
+
+    # Read the table from the database
+    table_df = spark.read.jdbc(url, f"{schema_name}.{table_name}", properties=properties)
+    table_df.createOrReplaceTempView("spark_table")
+    df = spark.sql(f"select * from spark_table")
+    df.show(truncate=False, vertical=True)
+    return df
