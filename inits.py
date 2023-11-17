@@ -10,7 +10,7 @@ class BasicActions:
     USERNAME = 'EPAM\Shirley_Shi'
     Trusted_Connection = 'True'
     TrustServerCertificate = 'True'
-    connectionString = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};Trusted_Connection=yes;TrustServerCertificate=yes"
+    connectionString = f"DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};Trusted_Connection=yes;TrustServerCertificate=yes"
 
     def connDB(self=connectionString):
         print(self)
