@@ -1,7 +1,7 @@
 import pyodbc
 import pandas
 import inits
-from pyspark.sql import SparkSession, DataFrame
+#from pyspark.sql import SparkSession, DataFrame
 
 
 
@@ -96,7 +96,7 @@ def verify_validity(schema_name: str, table_name: str, column_name: str, expecte
     else:
         return False
 
-
+"""
 def using_sparkSQL(schema_name: str, table_name: str) -> DataFrame:
     spark = (
         SparkSession.builder.master('local[*]')
@@ -121,3 +121,4 @@ def using_sparkSQL(schema_name: str, table_name: str) -> DataFrame:
     df = spark.sql(f"select * from spark_table")
     df.show(truncate=False, vertical=True)
     return df
+"""
