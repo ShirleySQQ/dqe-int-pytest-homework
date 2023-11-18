@@ -1,0 +1,1 @@
+python3 -m pytest test_case_docer_jenkins.py --html=report_docker.html
