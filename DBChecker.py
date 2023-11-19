@@ -6,7 +6,7 @@ import inits
 
 
 #cursor = inits.BasicActions.connDB()
-cursor = inits.BasicActions.connectDB_pymssql(self)
+cursor = inits.BasicActions.connectDB_pymssql()
 
 
 # close cursor and connection after finish testing

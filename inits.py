@@ -15,6 +15,7 @@ class BasicActions:
     Trusted_Connection = 'True'
     TrustServerCertificate = 'True'
     connectionString = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};Trusted_Connection=yes;TrustServerCertificate=yes"
+    connect_pymssql = f"{SERVER},{USERNAME},{DATABASE}"
 #connect sqlserver using pyodbc
     def connDB(self=connectionString):
         print(self)
@@ -31,8 +32,8 @@ class BasicActions:
     #  for r in records:
     #    print(f"{r.employee_id}\t{r.first_name}\t{r.last_name}\t{r.email}")
 #connect sqlserver using pymssql
-    def connectDB_pymssql(self):
-        connection = pymssql.connect(inits.BasicActions.SERVER,inits.BasicActions.USERNAME,inits.BasicActions.DATABASE)
+    def connectDB_pymssql(self=connect_pymssql):
+        connection = pymssql.connect(self)
         cursor = connection.cursor()
         return cursor
 
