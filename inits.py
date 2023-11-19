@@ -15,7 +15,7 @@ class BasicActions:
     Trusted_Connection = 'True'
     TrustServerCertificate = 'True'
     connectionString = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};Trusted_Connection=yes;TrustServerCertificate=yes"
-    connect_pymssql = f"{SERVER},{USERNAME},{DATABASE}"
+    connect_pymssql = f"server={SERVER},user={USERNAME},password='',database={DATABASE}"
 #connect sqlserver using pyodbc
     def connDB(self=connectionString):
         print(self)
