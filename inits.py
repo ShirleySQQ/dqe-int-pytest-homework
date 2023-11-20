@@ -3,7 +3,6 @@ import this
 import pyodbc
 import pymssql
 
-
 # connect sql server DB to TRN database
 import inits
 
@@ -15,8 +14,10 @@ class BasicActions:
     Trusted_Connection = 'True'
     TrustServerCertificate = 'True'
     connectionString = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};Trusted_Connection=yes;TrustServerCertificate=yes"
+    print(connectionString)
     connect_pymssql = f"server={SERVER},user={USERNAME},password='',database={DATABASE}"
-#connect sqlserver using pyodbc
+
+    # connect sqlserver using pyodbc
     def connDB(self=connectionString):
         print(self)
         conn = pyodbc.connect(self)
@@ -31,12 +32,19 @@ class BasicActions:
     # records = cursor.fetchall()
     #  for r in records:
     #    print(f"{r.employee_id}\t{r.first_name}\t{r.last_name}\t{r.email}")
-#connect sqlserver using pymssql
+    # connect sqlserver using pymssql
     def connectDB_pymssql(self=connect_pymssql):
-        connection = pymssql.connect(self)
-        cursor = connection.cursor()
-        return cursor
+        print(self)
+        connms = pymssql.connect(server="EPCNSZXW0007\SQLEXPRESS",
+                                 database='TRN')
+        cursorms = connms.cursor(as_dict=True)
 
+        sql_query = """
+        select * from TRN.hr.employees
+        """
+        cursorms.execute(sql_query)
 
-
-
+        # records = cursor.fetchall()
+        for r in cursorms:
+            print("id = %d" %(r['employee_id']))
+        return cursorms
